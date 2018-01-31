@@ -2,11 +2,11 @@ Pod::Spec.new do |s|
   s.name             = "DMPasscode"
   s.version          = "2.0.1"
   s.summary          = "Passcode screen with Touch ID support"
-  s.homepage         = "https://github.com/d-32/DMPasscode"
+  s.homepage         = "https://github.com/ViterbiDevelopment/DMPasscode"
   s.license          = 'Public Domain'
-  s.author           = { "Dylan Marriott" => "info@d-32.com" }
+  s.author           = { "ViterbiDevelopment" => "wangchaonihao@163.com" }
   s.source           = { :git => "https://github.com/ViterbiDevelopment/DMPasscode.git", :tag => s.version.to_s }
-  s.social_media_url = "https://twitter.com/dylan36032"
+  s.social_media_url = ""
   s.screenshot  	 = "http://46.105.26.1/uploads/passcode.png"
 
   s.platform     = :ios, '7.0'
