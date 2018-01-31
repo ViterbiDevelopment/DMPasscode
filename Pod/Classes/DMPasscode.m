@@ -90,7 +90,7 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
     _completion = completion;
     LAContext* context = [[LAContext alloc] init];
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"dmpasscode_touchid_reason", nil) reply:^(BOOL success, NSError* error) {
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"授权使用touchID" reply:^(BOOL success, NSError* error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     switch (error.code) {
@@ -143,9 +143,9 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
     [nc setModalPresentationStyle:UIModalPresentationFormSheet];
     [viewController presentViewController:nc animated:YES completion:nil];
     if (_mode == 0) {
-        [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
+        [_passcodeViewController setInstructions:@"输入新密码"];
     } else if (_mode == 1) {
-        [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_to_unlock", nil)];
+        [_passcodeViewController setInstructions:@"输入密码用来解锁"];
     }
 }
 
@@ -160,7 +160,7 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
     if (_mode == 0) {
         if (_count == 0) {
             _prevCode = code;
-            [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_repeat", nil)];
+            [_passcodeViewController setInstructions:@"重复密码"];
             [_passcodeViewController setErrorMessage:@""];
             [_passcodeViewController reset];
         } else if (_count == 1) {
@@ -168,8 +168,8 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
                 [[DMKeychain defaultKeychain] setObject:code forKey:KEYCHAIN_NAME];
                 [self closeAndNotify:YES withError:nil];
             } else {
-                [_passcodeViewController setInstructions:NSLocalizedString(@"dmpasscode_enter_new_code", nil)];
-                [_passcodeViewController setErrorMessage:NSLocalizedString(@"dmpasscode_not_match", nil)];
+                [_passcodeViewController setInstructions:@"输入新密码"];
+                [_passcodeViewController setErrorMessage:@"您输入的密码错误.\n请再次输入"];
                 [_passcodeViewController reset];
                 _count = 0;
                 return;
@@ -180,9 +180,10 @@ NSString * const DMUnlockErrorDomain = @"com.dmpasscode.error.unlock";
             [self closeAndNotify:YES withError:nil];
         } else {
             if (_count == 1) {
-                [_passcodeViewController setErrorMessage:NSLocalizedString(@"dmpasscode_1_left", nil)];
+                [_passcodeViewController setErrorMessage:@"还剩一次"];
             } else {
-                [_passcodeViewController setErrorMessage:[NSString stringWithFormat:NSLocalizedString(@"dmpasscode_n_left", nil), 2 - _count]];
+                NSString * leftS = [NSString stringWithFormat:@"还剩%d次",2-_count];
+                [_passcodeViewController setErrorMessage:leftS];
             }
             [_passcodeViewController reset];
             if (_count >= 2) { // max 3 attempts
