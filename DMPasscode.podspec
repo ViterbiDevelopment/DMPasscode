@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/ViterbiDevelopment/DMPasscode"
   s.license          = 'Public Domain'
   s.author           = { "ViterbiDevelopment" => "wangchaonihao@163.com" }
-  s.source           = { :git => "https://github.com/ViterbiDevelopment/DMPasscode.git", :tag => '2.1.1' }
+  s.source           = { :git => "https://github.com/ViterbiDevelopment/DMPasscode.git", :tag => "2.1.1" }
   s.social_media_url = ""
   s.screenshot  	 = "http://46.105.26.1/uploads/passcode.png"
 
