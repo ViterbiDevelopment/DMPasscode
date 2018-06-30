@@ -88,7 +88,13 @@
     _input.keyboardType = UIKeyboardTypeNumberPad;
     _input.keyboardAppearance = _config.inputKeyboardAppearance;
     [self.view addSubview:_input];
-    [_input becomeFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self->_input becomeFirstResponder];
+        
+    });
+    
+    
 }
 
 -(void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
